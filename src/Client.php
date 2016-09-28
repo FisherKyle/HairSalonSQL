@@ -19,7 +19,7 @@
             return $this->name;
         }
 
-        function getClass()
+        function getStylist()
         {
             return $this->stylist;
         }
@@ -38,36 +38,36 @@
         {
             $this->stylist = (string) $new_stylist;
         }
-
+//NOTE may have to fix for each loop --
         static function getAll()
         {
-            $returned_courses = $GLOBALS['DB']->query("SELECT * FROM courses;");
-            $courses = array();
-            foreach ($returned_courses as $course)
+            $returned_stylists = $GLOBALS['DB']->query("SELECT * FROM stylists;");
+            $stylists = array();
+            foreach ($returned_stylists as $stylist)
             {
-                $name = $course['name'];
-                $stylist = $course['stylist'];
-                $id = $course['C_Id'];
+                $name = $client['name'];
+                $stylist = $client['stylist'];
+                $id = $client['C_Id'];
                 $new_course = new Course($name, $stylist, $id);
-            array_push($courses, $new_course);
+            array_push($stylists, $new_appointment);
             }
-            return $courses;
+            return $stylists;
         }
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO courses (name, stylist) VALUES ('{$this->getName()}', '{$this->getClass()}')");
+            $GLOBALS['DB']->exec("INSERT INTO stylists (name, stylist) VALUES ('{$this->getName()}', '{$this->getStylist()}')");
             $this->id = (int) $GLOBALS['DB']->lastInsertId();
         }
 
         static function deleteAll()
         {
-            $GLOBALS['DB']->exec("DELETE FROM courses;");
+            $GLOBALS['DB']->exec("DELETE FROM stylists;");
         }
 
         function deleteOne()
         {
-            $GLOBALS['DB']->exec("DELETE FROM courses WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM stylists WHERE id = {$this->getId()};");
         }
 
         function update()
@@ -80,10 +80,6 @@
 
         }
 
-        function getStudent()
-        {
-
-        }
 
 
 

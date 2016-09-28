@@ -77,9 +77,9 @@
         {
             //Arrange
             $name1 = "Phillip FullofFruff";
-            $name2 = "Intro to Jerky";
+            $name2 = "Becca Bangs";
             $stylist1 = "Scissors Armani";
-            $stylist2 = "JRK_101";
+            $stylist2 = "Clipper McShay";
             $new_appointment1 = new Client($name1, $stylist1);
             $new_appointment1->save();
             $new_appointment2 = new Client($name2, $stylist2);
@@ -95,9 +95,9 @@
         {
             //Arrange
             $name1 = "Phillip FullofFruff";
-            $name2 = "Intro to Jerky";
+            $name2 = "Becca Bangs";
             $stylist1 = "Scissors Armani";
-            $stylist2 = "JRK_101";
+            $stylist2 = "Clipper McShay";
             $new_appointment1 = new Client($name1, $stylist1);
             $new_appointment1->save();
             $new_appointment2 = new Client($name2, $stylist2);
@@ -116,8 +116,8 @@
             $name1 = "Phillip FullofFruff";
             $stylist1 = "Scissors Armani";
             $new_appointment1 = new Client($name1, $stylist1);
-            $name2 = "Intro to Jerky";
-            $stylist2 = "JRK_101";
+            $name2 = "Becca Bangs";
+            $stylist2 = "Clipper McShay";
             $new_appointment2 = new Client($name2, $stylist2);
             $new_appointment1->save();
             $new_appointment2->save();
