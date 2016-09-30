@@ -7,16 +7,16 @@
     require_once "src/Client.php";
     require_once "src/Stylist.php";
 
-    $server = 'mysql:host=localhost:8889;dbname=hair_salon';
+    $server = 'mysql:host=localhost:8889;dbname=hair_salon_test';
     $username = 'root';
     $password = 'root';
     $DB = new PDO($server, $username, $password);
 
-    stylist ClientTest extends PHPUnit_Framework_TestCase
+    class StylistTest extends PHPUnit_Framework_TestCase
     {
         protected function tearDown()
         {
-            // Stylist::deleteAll();
+            Stylist::deleteAll();
             Client::deleteAll();
         }
 
@@ -25,9 +25,9 @@
         function test_getName()
         {
             //Arrange
-            $name = "Phillip Fullfruff";
-            $stylist = "Scissors Armani";
-            $new_appointment = new Client($name, $stylist);
+            $name = "Scissors Armani";
+            $S_id = 1
+            $new_stylist = new Stylist($name, $S_id);
             //Act
             $result = $new_appointment->getName();
             //Assert
@@ -132,22 +132,64 @@
         function test_update()
         {
             //arrange
-            $name = "Phillip FullofFruff";
-            $stylist = "Scissors Armani";
+            $name = "Scissors Armani";
             $new_stylist = new Stylist($name, $client);
             $new_stylist->save();
             $updated_stylist = "Clipper McShay";
-            $updated_client = "Becca Bangs";
 
             //act
-            $new_stylist->update($updated_stylist, $updated_client);
-            $all_clients = Client::getAll();
-            $selected_client = $all_clients[0]->getName();
-            $expected_output = $updated_name;
+            $new_stylist->update($updated_stylist);
 
             //assert
-            $this->assertEquals($expected_output, $result);
+            $this->assertEquals($updated_stylist, $new_stylist->getName());
         }
 
+        function test_find()
+            {
+                //Arrange
+                $name1 = "Scissors Armani";
+                $name2 = "Clipper McShay";
+                $name3 = "Ned";
+                $found_stylist1 = new Stylist($name1);
+                $found_stylist1->save();
+                $found_stylist2 = new Stylist($name2);
+                $found_stylist2->save();
+                $found_stylist3 = new Stylist($name3);
+                $found_stylist3->save();
+                //Act
+                $result = Stylist::find($found_stylist3->getId());
+                //Assert
+                $this->assertEquals($found_stylist3, $result);
+            }
+
+            function test_getClients()
+            {
+              //Arrange
+              $name1 = "Scissors Armani";
+              $found_stylist1 = new Stylist($name1);
+              $found_stylist1->save();
+              $found_stylist1_id = $found_stylist1->getId();
+
+              $name2 = "Clipper McShay";
+              $found_stylist2 = new Stylist($name2);
+              $found_stylist2->save();
+              $found_stylist2_id = $found_stylist2->getId();
+
+              $client1 = "Phillip Fruff";
+              $found_client1 = new Client($client1, $found_stylist1_id);
+              $found_client1->save();
+
+              $client2 = "Becca Bangs";
+              $found_client2 = new Client($client2, $found_stylist2_id);
+              $found_client2->save();
+
+              $client3 = "Moonstone Goatee";
+              $found_client3 = new Client($client3, $found_stylist1_id);
+              $found_client3->save();
+              //Act
+              $result = $found_stylist1->getClients();
+              //Assert
+              $this->assertEquals([$found_client1, $found_client3], $result);
+            }
     }
 ?>
