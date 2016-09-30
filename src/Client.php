@@ -34,54 +34,53 @@
             $this->name = (string) $new_name;
         }
 
-        function setClass($new_stylist)
+        function setStylist($new_stylist)
         {
             $this->stylist = (string) $new_stylist;
         }
-//NOTE may have to fix for each loop --
+
+// ---- functionality functions ---- //
+
         static function getAll()
         {
-            $returned_stylists = $GLOBALS['DB']->query("SELECT * FROM stylists;");
-            $stylists = array();
-            foreach ($returned_stylists as $stylist)
+            $all_clients = $GLOBALS['DB']->query("SELECT * FROM clients;");
+            $clients = array();
+            foreach($all_clients as $client)
             {
                 $name = $client['name'];
+                $id = $client['id'];
                 $stylist = $client['stylist'];
-                $id = $client['C_Id'];
-                $new_course = new Course($name, $stylist, $id);
-            array_push($stylists, $new_appointment);
+                $new_client = new Client($name, $stylist, $id);
+                array_push($clients, $new_client);
             }
-            return $stylists;
+            return $clients;
         }
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO stylists (name, stylist) VALUES ('{$this->getName()}', '{$this->getStylist()}')");
-            $this->id = (int) $GLOBALS['DB']->lastInsertId();
+          $GLOBALS['DB']->exec("INSERT INTO clients (name, stylist) VALUES ('{$this->getName()}', {$this->getStylistId()});");
+          $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
-        static function deleteAll()
+        function update($new_client)
         {
-            $GLOBALS['DB']->exec("DELETE FROM stylists;");
+          $GLOBALS['DB']->exec("UPDATE clients SET name = '{$new_client}' WHERE id = {$this->getId()};");
+          $this->setName($new_client);
         }
 
-        function deleteOne()
+        static function deleteOne()
         {
-            $GLOBALS['DB']->exec("DELETE FROM stylists WHERE id = {$this->getId()};");
+            $GLOBALS['DB']->exec("DELETE FROM clients WHERE id = {$this->getId()};");
         }
 
-        function update()
+        function deleteAll()
         {
-
+            $GLOBALS['DB']->exec("DELETE FROM clients;");
         }
 
-        static function find()
+        static function find($search_id)
         {
-
+        
         }
-
-
-
-
     }
 ?>
