@@ -39,7 +39,7 @@
             $this->stylist = (string) $new_stylist;
         }
 
-// ---- functionality functions ---- //
+// ---- FURTHER FUNCTIONALITY ---- //
 
         static function getAll()
         {

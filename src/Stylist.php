@@ -10,20 +10,21 @@
       $this->id =$id;
     }
 
-    function getId()
-    {
+// ---- GET * SET ---- //
+
+    function getName(){
+        return $this->name;
+    }
+
+    function getId(){
       return $this->id;
     }
 
-    function getName()
-    {
-      return $this->name;
-    }
-
-    function setName($new_name)
-    {
+    function setName($new_name){
       $this->name = (string) $new_name;
     }
+
+// ---- FURTHER FUNCTIONALITY ---- //
 
     function save()
     {
@@ -31,22 +32,22 @@
       $this->id = $GLOBALS['DB']->lastInsertId();
     }
 
-    function updateName($new_name)
+    function delete()
+    {
+        $GLOBALS['DB']->exec("DELETE FROM stylists WHERE id = {$this->getId()};");
+    }
+
+    function update($new_name)
     {
       $GLOBALS['DB']->exec("UPDATE stylists SET name = '{$new_name}' WHERE id = {$this->getId()};");
       $this->setName($new_name);
     }
 
-    function delete()
-    {
-      $GLOBALS['DB']->exec("DELETE FROM stylists WHERE id = {$this->getId()};");
-    }
-
     static function getAll()
     {
-      $returned_stylists = $GLOBALS['DB']->query("SELECT * FROM stylists;");
+      $found_stylists = $GLOBALS['DB']->query("SELECT * FROM stylists;");
       $stylists = array();
-      foreach($returned_stylists as $stylist)
+      foreach($found_stylists as $stylist)
       {
         $name = $stylist['name'];
         $id = $stylist['id'];
@@ -79,13 +80,13 @@
     function getClients()
     {
       $clients = array();
-      $returned_clients = $GLOBALS['DB']->query("SELECT * FROM clients WHERE stylist_id = {$this->getId()};");
-      foreach($returned_clients as $client)
+      $found_clients = $GLOBALS['DB']->query("SELECT * FROM clients WHERE stylist = {$this->getId()};");
+      foreach($found_clients as $client)
       {
         $name = $client['name'];
-        $stylist_id = $client['stylist_id'];
+        $stylist = $client['stylist'];
         $id = $client['id'];
-        $new_client = new Client($name, $stylist_id, $id);
+        $new_client = new Client($name, $stylist, $id);
         array_push($clients, $new_client);
       }
       return $clients;
