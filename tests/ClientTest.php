@@ -22,7 +22,7 @@
 
 // ----Tests---- //
 
-        function test_GetName()
+        function test_getName()
         {
             //Arrange
             $name = "Phillip Fullfruff";
@@ -34,19 +34,19 @@
             $this->assertEquals($name, $result);
         }
 
-        function test_GetClass()
+        function test_getClient()
         {
         //Arrange
         $name = "Phillip FullofFruff";
         $stylist = "Scissors Armani";
-        $new_appointment = new Client($name, $stylist);
+        $new_client = new Client($name, $stylist);
         //Act
-        $result = $new_appointment->getClass();
+        $result = $new_client->getClient();
         //Assert
         $this->assertEquals($stylist, $result);
         }
 
-        function test_GetId()
+        function test_getId()
         {
             //Arrange
             $id = 2;
@@ -60,7 +60,7 @@
             $this->assertEquals($expected_output, $result);
         }
 
-        function test_Save()
+        function test_save()
         {
             //Arrange
             $name = "Phillip FullofFruff";
@@ -73,7 +73,7 @@
             $this->assertEquals($new_appointment, $result[0]);
         }
 
-        function test_GetAll()
+        function test_getAll()
         {
             //Arrange
             $name1 = "Phillip FullofFruff";
@@ -91,7 +91,7 @@
             $this->assertEquals($expected_output, $result);
         }
 
-        function test_DeleteAll()
+        function test_deleteAll()
         {
             //Arrange
             $name1 = "Phillip FullofFruff";
@@ -110,20 +110,20 @@
             $this->assertEquals($expected_output, $result);
         }
 
-        function test_DeleteOne()
+        function test_deleteOne()
         {
             //Arrange
             $name1 = "Phillip FullofFruff";
             $stylist1 = "Scissors Armani";
-            $new_appointment1 = new Client($name1, $stylist1);
+            $new_client1 = new Client($name1, $stylist1);
             $name2 = "Becca Bangs";
             $stylist2 = "Clipper McShay";
-            $new_appointment2 = new Client($name2, $stylist2);
-            $new_appointment1->save();
-            $new_appointment2->save();
-            $expected_output = [$new_appointment1];
+            $new_client2 = new Client($name2, $stylist2);
+            $new_client1->save();
+            $new_client2->save();
+            $expected_output = [$new_client1];
             //Act
-            $new_appointment2->deleteOne();
+            $new_client2->deleteOne();
             $result = Client::getAll();
             //Assert
             $this->assertEquals($expected_output, $result);
