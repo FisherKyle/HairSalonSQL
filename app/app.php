@@ -20,28 +20,33 @@
     ));
 
     $app->get("/", function() use($app){
-        return $app['twig']->render('home.html.twig', array('clients'=>Client::getAll(), 'stylists'=>Stylist::getAll()));
+        return $app['twig']->render('home.html.twig');
     });
 
     $app->get("/clients_page", function() use($app){
-        return $app['twig']->render('clients_page.html.twig');
+        return $app['twig']->render('clients_page.html.twig', array('clients' => Client::getAll(), 'stylists' => Stylist::getAll()));
     });
 
     $app->get("/stylists_page", function() use($app){
-        return $app['twig']->render('stylists_page.html.twig');
+        return $app['twig']->render('stylists_page.html.twig', array('stylists' => Stylist::getAll()));
     });
 
-    $app->post("/add_client", function() use ($app){
-        $name=$_POST['client_name'];
-        $stylist=$_POST['stylist_name'];
-        $new_client=new Client($name, $stylist);
-        $new_client->save();
+    $app->post("/added_client", function() use ($app)
+    {
+      $new_client = new Client($_POST(['name'], ['stylist_id']));
+      $new_client->save();
+      return $app['twig']->render('clients.html.twig', array('clients' =>Client::getAll()));
     });
 
-    $app->post("/add_stylist", function() use($app){
-        $name=$_POST['stylist_name'];
-        $
-    })
+    $app->post("/added_stylist", function() use ($app)
+    {
+      $new_stylist = new Stylist($_POST['name']);
+      $new_stylist->save();
+      return $app['twig']->render('stylists_page.html.twig', array('stylists' =>Stylist::getAll()));
+    });
+
+
+
 
 
 ?>

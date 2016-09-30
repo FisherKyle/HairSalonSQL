@@ -129,5 +129,25 @@
             $this->assertEquals($expected_output, $result);
         }
 
+        function test_update()
+        {
+            //arrange
+            $name = "Phillip FullofFruff";
+            $stylist = "Scissors Armani";
+            $new_stylist = new Stylist($name, $client);
+            $new_stylist->save();
+            $updated_stylist = "Clipper McShay";
+            $updated_client = "Becca Bangs";
+
+            //act
+            $new_stylist->update($updated_stylist, $updated_client);
+            $all_clients = Client::getAll();
+            $selected_client = $all_clients[0]->getName();
+            $expected_output = $updated_name;
+
+            //assert
+            $this->assertEquals($expected_output, $result);
+        }
+
     }
 ?>
