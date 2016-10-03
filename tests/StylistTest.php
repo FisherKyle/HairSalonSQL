@@ -38,7 +38,7 @@
         {
         //Arrange
         $name = "Scissors Armani";
-        $client = "Phillip FullofFruff";
+        $client = "Phillip Fulfruff";
         $new_stylist = new Stylist($name, $client);
         //Act
         $result = $new_stylist->getStylist();
@@ -51,7 +51,7 @@
             //Arrange
             $id = 2;
             $name = "Scissors Armani";
-            $client = "Phillip FullofFruff";
+            $client = "Phillip Fulfruff";
             $new_stylist = new Client($name, $stylist, $id);
             $expected_output = 2;
             //Act
@@ -76,7 +76,7 @@
         function test_getAll()
         {
             //Arrange
-            $name1 = "Phillip FullofFruff";
+            $name1 = "Phillip Fulfruff";
             $name2 = "Becca Bangs";
             $stylist1 = "Scissors Armani";
             $stylist2 = "Clipper McShay";
@@ -94,7 +94,7 @@
         function test_deleteAll()
         {
             //Arrange
-            $name1 = "Phillip FullofFruff";
+            $name1 = "Phillip Fulfruff";
             $name2 = "Becca Bangs";
             $stylist1 = "Scissors Armani";
             $stylist2 = "Clipper McShay";
@@ -113,7 +113,7 @@
         function test_deleteOne()
         {
             //Arrange
-            $name1 = "Phillip FullofFruff";
+            $name1 = "Phillip Fulfruff";
             $stylist1 = "Scissors Armani";
             $new_client1 = new Client($name1, $stylist1);
             $name2 = "Becca Bangs";
@@ -175,7 +175,7 @@
               $found_stylist2->save();
               $found_stylist2_id = $found_stylist2->getId();
 
-              $client1 = "Phillip Fruff";
+              $client1 = "Phillip Fulfruff";
               $found_client1 = new Client($client1, $found_stylist1_id);
               $found_client1->save();
 

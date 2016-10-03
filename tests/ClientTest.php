@@ -25,7 +25,7 @@
         function test_getName()
         {
             //Arrange
-            $name = "Phillip Fullfruff";
+            $name = "Phillip Fulfruff";
             $stylist = "Scissors Armani";
             $new_appointment = new Client($name, $stylist);
             //Act
@@ -34,14 +34,14 @@
             $this->assertEquals($name, $result);
         }
 
-        function test_getClient()
+        function test_getStylist()
         {
         //Arrange
-        $name = "Phillip FullofFruff";
+        $name = "Phillip Fulfruff";
         $stylist = "Scissors Armani";
         $new_client = new Client($name, $stylist);
         //Act
-        $result = $new_client->getClient();
+        $result = $new_client->getStylist();
         //Assert
         $this->assertEquals($stylist, $result);
         }
@@ -50,7 +50,7 @@
         {
             //Arrange
             $id = 2;
-            $name = "Phillip FullofFruff";
+            $name = "Phillip Fulfruff";
             $stylist = "Scissors Armani";
             $new_stylist = new Client($name, $stylist, $id);
             $expected_output = 2;
@@ -63,20 +63,20 @@
         function test_save()
         {
             //Arrange
-            $name = "Phillip FullofFruff";
+            $name = "Phillip Fulfruff";
             $stylist = "Scissors Armani";
             $new_appointment1 = new Client($name, $stylist);
             $new_appointment1->save();
             //Act
             $result = Client::getAll();
             //Assert
-            $this->assertEquals($new_appointment, $result[0]);
+            $this->assertEquals($new_appointment1, $result);
         }
 
         function test_getAll()
         {
             //Arrange
-            $name1 = "Phillip FullofFruff";
+            $name1 = "Phillip Fulfruff";
             $name2 = "Becca Bangs";
             $stylist1 = "Scissors Armani";
             $stylist2 = "Clipper McShay";
@@ -94,7 +94,7 @@
         function test_deleteAll()
         {
             //Arrange
-            $name1 = "Phillip FullofFruff";
+            $name1 = "Phillip Fulfruff";
             $name2 = "Becca Bangs";
             $stylist1 = "Scissors Armani";
             $stylist2 = "Clipper McShay";
@@ -132,17 +132,17 @@
         function test_update()
         {
             //arrange
-            $name = "Phillip FullofFruff";
+            $name = "Phillip Fulfruff";
             $stylist = "Scissors Armani";
-            $new_stylist = new Stylist($name, $client);
-            $new_stylist->save();
-            $updated_stylist = "Clipper McShay";
-            $updated_client = "Becca Bangs";
+            $new_client = new Client($name, $stylist);
+            $new_client->save();
+            $updated_name = "Phillip Fulfruff";
+            $updated_stylist = "Becca Bangs";
 
             //act
-            $new_stylist->update($updated_stylist, $updated_client);
+            $new_client->update($updated_name, $updated_stylist);
             $all_clients = Client::getAll();
-            $selected_client = $all_clients[0]->getName();
+            $selected_client = $all_clients[1]->getStylist();
             $expected_output = $updated_name;
 
             //assert
@@ -158,7 +158,7 @@
           $stylist_id = $test_stylist->getId();
 
           $name1 = "Becca Bangs";
-          $name2 = "Phillip Fullofruff";
+          $name2 = "Phillip Fulfuff";
           $name3 = "Moonstone Goatee";
           $test_client1 = new Client($name1, $stylist);
           $test_client1->save();

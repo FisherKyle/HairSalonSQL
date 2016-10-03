@@ -58,24 +58,24 @@
 
         function save()
         {
-          $GLOBALS['DB']->exec("INSERT INTO clients (name, stylist) VALUES ('{$this->getName()}', {$this->getStylistId()});");
+          $GLOBALS['DB']->exec("INSERT INTO clients (name, stylist) VALUES ('{$this->getName()}', {$this->getStylist()});");
           $this->id = $GLOBALS['DB']->lastInsertId();
+        }
+
+        static function deleteAll()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM clients;");
+        }
+
+        function deleteOne()
+        {
+          $GLOBALS['DB']->exec("DELETE FROM clients WHERE id = {$this->getId()};");
         }
 
         function update($new_client)
         {
           $GLOBALS['DB']->exec("UPDATE clients SET name = '{$new_client}' WHERE id = {$this->getId()};");
           $this->setName($new_client);
-        }
-
-        function deleteOne()
-        {
-            $GLOBALS['DB']->exec("DELETE FROM clients WHERE id = {$this->getId()};");
-        }
-
-        static function deleteAll()
-        {
-            $GLOBALS['DB']->exec("DELETE FROM clients;");
         }
 
         static function find($search_id)

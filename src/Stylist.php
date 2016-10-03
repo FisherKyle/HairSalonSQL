@@ -77,7 +77,7 @@
       return $found_stylist;
     }
 
-    function getClients()
+    function getClient()
     {
       $clients = array();
       $found_clients = $GLOBALS['DB']->query("SELECT * FROM clients WHERE stylist = {$this->getId()};");
