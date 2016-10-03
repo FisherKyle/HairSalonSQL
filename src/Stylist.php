@@ -32,7 +32,7 @@
       $this->id = $GLOBALS['DB']->lastInsertId();
     }
 
-    function delete()
+    function deleteOne()
     {
         $GLOBALS['DB']->exec("DELETE FROM stylists WHERE id = {$this->getId()};");
     }

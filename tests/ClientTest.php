@@ -12,11 +12,11 @@
     $password = 'root';
     $DB = new PDO($server, $username, $password);
 
-    stylist ClientTest extends PHPUnit_Framework_TestCase
+    class ClientTest extends PHPUnit_Framework_TestCase
     {
         protected function tearDown()
         {
-            // Stylist::deleteAll();
+            Stylist::deleteAll();
             Client::deleteAll();
         }
 
@@ -170,8 +170,6 @@
           $result = Client::find($test_client3->getId());
           //Assert
           $this->assertEquals($test_client3, $result);
-        }
-
         }
 
     }

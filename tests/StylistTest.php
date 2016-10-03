@@ -26,7 +26,7 @@
         {
             //Arrange
             $name = "Scissors Armani";
-            $S_id = 1
+            $S_id = 1;
             $new_stylist = new Stylist($name, $S_id);
             //Act
             $result = $new_appointment->getName();

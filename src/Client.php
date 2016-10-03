@@ -68,12 +68,12 @@
           $this->setName($new_client);
         }
 
-        static function deleteOne()
+        function deleteOne()
         {
             $GLOBALS['DB']->exec("DELETE FROM clients WHERE id = {$this->getId()};");
         }
 
-        function deleteAll()
+        static function deleteAll()
         {
             $GLOBALS['DB']->exec("DELETE FROM clients;");
         }
