@@ -37,7 +37,7 @@
         $GLOBALS['DB']->exec("DELETE FROM stylists WHERE id = {$this->getId()};");
     }
 
-    function update($new_name)
+    function updateName($new_name)
     {
       $GLOBALS['DB']->exec("UPDATE stylists SET name = '{$new_name}' WHERE id = {$this->getId()};");
       $this->setName($new_name);
@@ -77,16 +77,16 @@
       return $found_stylist;
     }
 
-    function getClient()
+    function getClients()
     {
       $clients = array();
-      $found_clients = $GLOBALS['DB']->query("SELECT * FROM clients WHERE stylist = {$this->getId()};");
+      $found_clients = $GLOBALS['DB']->query("SELECT * FROM clients WHERE stylist_id = {$this->getId()};");
       foreach($found_clients as $client)
       {
         $name = $client['name'];
-        $stylist = $client['stylist'];
+        $stylist_id = $client['stylist_id'];
         $id = $client['id'];
-        $new_client = new Client($name, $stylist, $id);
+        $new_client = new Client($name, $stylist_id, $id);
         array_push($clients, $new_client);
       }
       return $clients;
