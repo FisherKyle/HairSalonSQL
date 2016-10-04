@@ -26,24 +26,24 @@
         {
             //Arrange
             $name = "Phillip Fulfruff";
-            $stylist = "Scissors Armani";
-            $new_appointment = new Client($name, $stylist);
+            $stylist_id = 1;
+            $new_client = new Client($name, $stylist_id);
             //Act
-            $result = $new_appointment->getName();
+            $result = $new_client->getName();
             //Assert
             $this->assertEquals($name, $result);
         }
 
-        function test_getStylist()
+        function test_getStylistId()
         {
         //Arrange
         $name = "Phillip Fulfruff";
-        $stylist = "Scissors Armani";
-        $new_client = new Client($name, $stylist);
+        $stylist_id = 1;
+        $new_client = new Client($name, $stylist_id);
         //Act
-        $result = $new_client->getStylist();
+        $result = $new_client->getStylistId();
         //Assert
-        $this->assertEquals($stylist, $result);
+        $this->assertEquals($stylist_id, $result);
         }
 
         function test_getId()
@@ -51,11 +51,11 @@
             //Arrange
             $id = 2;
             $name = "Phillip Fulfruff";
-            $stylist = "Scissors Armani";
-            $new_stylist = new Client($name, $stylist, $id);
+            $stylist_id = 3;
+            $new_client = new Client($name, $stylist_id, $id);
             $expected_output = 2;
             //Act
-            $result = $new_stylist->getId();
+            $result = $new_client->getId();
             //arrange
             $this->assertEquals($expected_output, $result);
         }
@@ -64,13 +64,14 @@
         {
             //Arrange
             $name = "Phillip Fulfruff";
-            $stylist = "Scissors Armani";
-            $new_appointment1 = new Client($name, $stylist);
-            $new_appointment1->save();
+            $stylist_id = 1;
+            $new_client = new Client($name, $stylist_id);
             //Act
-            $result = Client::getAll();
+            $new_client->save();
+            $all_clients = Client::getAll();
+            $result = $all_clients[0];
             //Assert
-            $this->assertEquals($new_appointment1, $result);
+            $this->assertEquals($new_client, $result);
         }
 
         function test_getAll()
@@ -78,13 +79,13 @@
             //Arrange
             $name1 = "Phillip Fulfruff";
             $name2 = "Becca Bangs";
-            $stylist1 = "Scissors Armani";
-            $stylist2 = "Clipper McShay";
-            $new_appointment1 = new Client($name1, $stylist1);
-            $new_appointment1->save();
-            $new_appointment2 = new Client($name2, $stylist2);
-            $new_appointment2->save();
-            $expected_output = [$new_appointment1, $new_appointment2];
+            $stylist_id1 = 1;
+            $stylist_id2 = 2;
+            $new_client1 = new Client($name1, $stylist_id1);
+            $new_client1->save();
+            $new_client2 = new Client($name2, $stylist_id2);
+            $new_client2->save();
+            $expected_output = [$new_client1, $new_client2];
             //Act
             $result = Client::getAll();
             //Assert
@@ -96,11 +97,11 @@
             //Arrange
             $name1 = "Phillip Fulfruff";
             $name2 = "Becca Bangs";
-            $stylist1 = "Scissors Armani";
-            $stylist2 = "Clipper McShay";
-            $new_appointment1 = new Client($name1, $stylist1);
+            $stylist_id1 = 1;
+            $stylist_id2 = 2;
+            $new_appointment1 = new Client($name1, $stylist_id1);
             $new_appointment1->save();
-            $new_appointment2 = new Client($name2, $stylist2);
+            $new_appointment2 = new Client($name2, $stylist_id2);
             $new_appointment2->save();
             $expected_output = [];
             //Act
@@ -114,11 +115,11 @@
         {
             //Arrange
             $name1 = "Phillip FullofFruff";
-            $stylist1 = "Scissors Armani";
-            $new_client1 = new Client($name1, $stylist1);
+            $stylist_id1 = 1;
+            $new_client1 = new Client($name1, $stylist_id1);
             $name2 = "Becca Bangs";
-            $stylist2 = "Clipper McShay";
-            $new_client2 = new Client($name2, $stylist2);
+            $stylist_id2 = 2;
+            $new_client2 = new Client($name2, $stylist_id2);
             $new_client1->save();
             $new_client2->save();
             $expected_output = [$new_client1];
@@ -129,22 +130,42 @@
             $this->assertEquals($expected_output, $result);
         }
 
-        function test_update()
+        function test_updateName()
+        {
+            //arrange
+            $name = "Phillip Nofruff";
+            $stylist_id = 1;
+            $new_client = new Client($name, $stylist_id);
+            $new_client->save();
+            $updated_name = "Phillip Fulfruff";
+
+            //act
+            $new_client->updateName($updated_name);
+            $all_clients = Client::getAll();
+            $expected_output = $updated_name;
+            $result = $all_clients[0]->getName();
+
+
+            //assert
+            $this->assertEquals($expected_output, $result);
+        }
+
+        function test_switchProperty()
         {
             //arrange
             $name = "Phillip Fulfruff";
-            $stylist = "Scissors Armani";
-            $new_client = new Client($name, $stylist);
+            $stylist_id = 1;
+            $new_client = new Client($name, $stylist_id);
             $new_client->save();
-            $updated_name = "Phillip Fulfruff";
-            $updated_stylist = "Becca Bangs";
-
+            $switched_name = "Becca Bangs";
+            $switched_stylist_id = 2;
             //act
-            $new_client->update($updated_name, $updated_stylist);
+            $new_client->switchProperty($switched_name, $switched_stylist_id);
+            $expected_output = [$switched_name, $switched_stylist_id];
             $all_clients = Client::getAll();
-            $selected_client = $all_clients[1]->getStylist();
-            $expected_output = $updated_name;
-
+            $returned_switched_name = $all_clients[0]->getName();
+            $returned_switched_stylist_id = $all_clients[0]->getStylistId();
+            $result = [$returned_switched_name, $returned_switched_stylist_id];
             //assert
             $this->assertEquals($expected_output, $result);
         }
@@ -160,11 +181,11 @@
           $name1 = "Becca Bangs";
           $name2 = "Phillip Fulfuff";
           $name3 = "Moonstone Goatee";
-          $test_client1 = new Client($name1, $stylist);
+          $test_client1 = new Client($name1, $stylist_id);
           $test_client1->save();
-          $test_client2 = new Client($name2, $stylist);
+          $test_client2 = new Client($name2, $stylist_id);
           $test_client2->save();
-          $test_client3 = new Client($name3, $stylist);
+          $test_client3 = new Client($name3, $stylist_id);
           $test_client3->save();
           //Act
           $result = Client::find($test_client3->getId());

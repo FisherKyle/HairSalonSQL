@@ -2,13 +2,13 @@
     class Client
     {
         private $name;
-        private $stylist;
+        private $stylist_id;
         private $id;
 
-        function __construct($name, $stylist, $id = null)
+        function __construct($name, $stylist_id, $id = null)
             {
                 $this->name = $name;
-                $this->stylist = $stylist;
+                $this->stylist_id = $stylist_id;
                 $this->id = $id;
             }
 
@@ -16,17 +16,17 @@
 
         function getName()
         {
-            return $this->name;
+            return (string) $this->name;
         }
 
-        function getStylist()
+        function getStylistId()
         {
-            return $this->stylist;
+            return (int) $this->stylist_id;
         }
 
         function getId()
         {
-            return $this->id;
+            return (int) $this->id;
         }
 
         function setName($new_name)
@@ -34,9 +34,9 @@
             $this->name = (string) $new_name;
         }
 
-        function setStylist($new_stylist)
+        function setStylistId($new_stylist_id)
         {
-            $this->stylist = (string) $new_stylist;
+            $this->stylist_id = (int) $new_stylist_id;
         }
 
 // ---- FURTHER FUNCTIONALITY ---- //
@@ -49,8 +49,8 @@
             {
                 $name = $client['name'];
                 $id = $client['id'];
-                $stylist = $client['stylist'];
-                $new_client = new Client($name, $stylist, $id);
+                $stylist_id = $client['stylist_id'];
+                $new_client = new Client($name, $stylist_id, $id);
                 array_push($clients, $new_client);
             }
             return $clients;
@@ -58,7 +58,7 @@
 
         function save()
         {
-          $GLOBALS['DB']->exec("INSERT INTO clients (name, stylist) VALUES ('{$this->getName()}', {$this->getStylist()});");
+          $GLOBALS['DB']->exec("INSERT INTO clients (name, stylist_id) VALUES ('{$this->getName()}', {$this->getStylistId()});");
           $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -72,10 +72,22 @@
           $GLOBALS['DB']->exec("DELETE FROM clients WHERE id = {$this->getId()};");
         }
 
-        function update($new_client)
+        function updateName($new_client_name)
         {
-          $GLOBALS['DB']->exec("UPDATE clients SET name = '{$new_client}' WHERE id = {$this->getId()};");
-          $this->setName($new_client);
+          $GLOBALS['DB']->exec("UPDATE clients SET name = '{$new_client_name}' WHERE id = {$this->getId()};");
+          $this->setName($new_client_name);
+        }
+
+        function switchProperty($switched_client_name=null, $switched_stylist_id=null)
+        {
+            if ($switched_client_name != null) {
+                $GLOBALS['DB']->exec("UPDATE clients SET name = '{$switched_client_name}' WHERE id = {$this->getId()};");
+                $this->setName($switched_client_name);
+            }
+            if ($switched_stylist_id != null) {
+                $GLOBALS['DB']->exec("UPDATE clients SET stylist_id = '{$switched_stylist_id}' WHERE id = {$this->getId()};");
+                $this->setStylistId ($switched_stylist_id);
+            }
         }
 
         static function find($search_id)
