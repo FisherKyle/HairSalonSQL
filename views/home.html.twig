@@ -12,7 +12,7 @@
                 <h2>Hair Management Systems:</h2>
 
                 <div class = "col-xs-6">
-                    <form action="/updated_stylist" method="post">
+                    <form action="/stylist_list" method="post">
                         <div class="form-group has-primary">
                             <label for = "stylist">stylist name:</label>
                             <input class="form-control" type="text" id="stylist_name" name="stylist_name" class="form-control" placeholder="ex: Scissors Armani" required>
@@ -20,23 +20,30 @@
                         </div>
                         <button type="submit" class="btn btn-success">add stylist</button></br>
                     </form>
-                    {% for course in courses %}
-                    <h4><a href="/stylists/{{ stylist.getId }}">{{ stylist.getName }}</a></h4>
-                    {% endfor %}
+
+                    {% if stylists is not empty %}
+                        <ul>
+                            {% for stylist in stylists %}
+                                <li><a href="/stylist_list/{{ stylist.getId }}">{{ stylist.getName }}</a></li>
+                            {% endfor %}
+                    </ul>
+                    {% endif %}
 
                 </div>
 
                 <div class = "col-xs-6">
-                    <form action="/updated_client" method="post">
+                    <form action="/client_list" method="post">
                         <div class="form-group has-primary">
-                            <label for = "client">client name:</label>
-                            <input class="form-control" type="text" id="client_name" name="client_name" class="form-control" placeholder="ex: Phillip Fruff" required>
+                            <label for = "client-name">client name:</label>
+                            <input class="form-control" type="text" id="client-name" name="client_name" class="form-control" placeholder="ex: Phillip Fruff" required>
+                            <label for="stylist-id">stylist id:</label>
+                            <input class="form-control" type="number" id="stylist-id" name="stylist_id" class="form-control" placeholder="ex: 5">
 
                         </div>
                         <button type="submit" class="btn btn-success">add client</button></br>
                     </form>
-                    {% for student in students %}
-                    <h4><a href="/clients/{{ client.getId }}">{{ client.getName }}</a></h4>
+                    {% for client in clients %}
+                    <h4><a href="/client_list/{{ client.getId }}">{{ client.getName }}</a></h4>
                     {% endfor %}
                 </div>
 

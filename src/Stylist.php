@@ -7,7 +7,7 @@
     function __construct($name, $id=null)
     {
       $this->name = $name;
-      $this->id =$id;
+      $this->id = $id;
     }
 
 // ---- GET * SET ---- //
@@ -91,5 +91,6 @@
       }
       return $clients;
     }
+
   }
 ?>

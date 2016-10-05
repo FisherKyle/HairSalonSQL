@@ -29,21 +29,17 @@
         return $app['twig']->render('home.html.twig');
     });
 
-    $app->get("/clients_page", function() use($app){
-        return $app['twig']->render('clients_page.html.twig', array('clients' => Client::getAll(), 'stylists' => Stylist::getAll()));
-    });
-
     $app->get("/stylists_page", function() use($app){
         return $app['twig']->render('stylists_page.html.twig', array('stylists' => Stylist::getAll()));
     });
-
-    $app->post("/updated_client", function() use ($app){
-      $new_client = new Client($_POST(['name'], ['stylist_id']));
+// NOTE this is where I add new clients ------------ //
+    $app->post("/client_list", function() use ($app){
+      $new_client = new Client($_POST['client_name'], $_POST['stylist_id']);
       $new_client->save();
-      return $app['twig']->render('clients.html.twig', array('clients' =>Client::getAll()));
+      return $app['twig']->render('clients_page.html.twig', array('clients' =>Client::getAll()));
     });
-
-    $app->post("/updated_stylist", function() use ($app){
+// NOTE this is where I add new stylists ---------- //
+    $app->post("/stylist_list", function() use ($app){
         $new_stylist = new Stylist($_POST['stylist_name']);
         $new_stylist->save();
         return $app['twig']->render('stylists_page.html.twig', array('stylists' =>Stylist::getAll()));
@@ -55,11 +51,12 @@
         return $app['twig']->render('clients_page.html.twig', array('clients' => Client::getAll()));
     });
 
-
-    $app->patch("/updated_stylist/{id}", function() use ($app){
+//NOTE {id} gets used in the function ($id) as that which is passed into the find method on our variable $stylist, declared, later to become the 'current_stylist' in the array
+    $app->get("/stylist_list/{id}", function($id) use ($app){
         $stylist = Stylist::find($id);
-        $stylist->updateName($_POST['new_name']);
-        return $app['twig']->render('stylists_page.html.twig', array('stylists' => Stylist::getAll()));
+        return $app['twig']->render('stylist_details.html.twig', array(
+            'current_stylist' => $stylist
+        ));
     });
 
     return $app;

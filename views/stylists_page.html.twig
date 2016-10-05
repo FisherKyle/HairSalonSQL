@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="styles.css" rel="stylesheet" type="text/css">
+        <title>Hair Salon</title>
+    </head>
+    <body>
+        <h1>Stylists:</h1>
+        {% if stylists is not empty %}
+            <ul>
+                {% for stylist in stylists %}
+                    <li><a href "/stylist_list/{{ stylist.getId }}">{{ stylist.getName }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h2> Currently, no stylists. </h2>
+        {% endif %}
+   </body>
+</html>
