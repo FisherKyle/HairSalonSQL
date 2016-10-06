@@ -5,15 +5,36 @@
         <link href="styles.css" rel="stylesheet" type="text/css">
         <title>Hair Salon</title>
     </head>
+
     <body>
+
+
         <h3>{{ current_stylist.getName }}</h3>
-        <h4>Add clients:</h4>
-        <form action="/client_list" method="post">
-            <div class="form-group has-primary">
-                <label for = "client-name">client name:</label>
-                <input class="form-control" type="text" id="client-name" name="client_name" class="form-control" placeholder="ex: Phillip Fruff" required>
-            </div>
-            <button type="submit" class="btn btn-success">add client</button></br>
+
+        <h3>{{ current_stylist.getId }}</h3>
+
+
+
+        <p><a href="/stylist_list/{{ current_stylist.getId }}/edit">edit stylist</a></p><br>
+
+        <h3>add client</h3><br>
+
+
+        <form action="/stylist_details/{{ current_stylist.getId }}" method="post">
+          <div class="form-group">
+            <input class="form-control" id="stylist_id" name="stylist_id" type="hidden" value="{{ current_stylist.getId }}">
+            <label for="client-name">Client Name</label>
+            <input id="client-name" name="client-name" type="text"><br>
+          </div>
+            <button class="btn btn-success" type="submit">add</button>
         </form>
+
+        {% for client in stylist_clients %}
+        <ul>
+            <li>{{ client.getName }}</li>
+        </ul>
+        {% endfor %}
+
+        <p><a href="/">home</a>
    </body>
 </html>

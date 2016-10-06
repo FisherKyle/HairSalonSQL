@@ -10,11 +10,12 @@
         {% if stylists is not empty %}
             <ul>
                 {% for stylist in stylists %}
-                    <li><a href "/stylist_list/{{ stylist.getId }}">{{ stylist.getName }}</a></li>
+                    <li><a href="/stylist_details/{{ stylist.getId }}">{{ stylist.getName }}</a></li>
                 {% endfor %}
             </ul>
         {% else %}
-            <h2> Currently, no stylists. </h2>
+            <h2> no stylists present </h2>
         {% endif %}
+
    </body>
 </html>
