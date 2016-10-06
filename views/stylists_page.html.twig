@@ -1,39 +1,49 @@
+
 <html>
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link href="styles.css" rel="stylesheet" type="text/css">
-        <title>Hair Salon</title>
+        <link href="/styles.css" rel="stylesheet" type="text/css">
+        <title>Hair Management Systems</title>
     </head>
+
     <body>
-        <h2>manage stylists:</h2>
-        {% if stylists is not empty %}
-            <ul>
-                {% for stylist in stylists %}
+        <div class="container jumbotron" id="big_box">
+            <div class = "row">
 
-                    <li><a href="/stylist_details/{{ stylist.getId }}">{{ stylist.getName }}</a>
+                <h2>Hair Management Systems:</h2>
+                <h3>manage stylists:</h3>
+                {% if stylists is not empty %}
+                    <ul>
+                        {% for stylist in stylists %}
 
-                        <!-- <form action="stylist_delete_one" method="post"> -->
+                        <li><a href="/stylist_details/{{ stylist.getId }}">{{ stylist.getName }}</a>
+                            <a href="/stylist_list/{{ stylist.getId }}/delete">
+                                <span id="remove" class="glyphicon glyphicon-remove" onclick="return confirm('remove stylist?')" /></span>
+                            </a>
+                        </li>
 
-                    <a href="/stylist_list/{{ stylist.getId }}/delete">
-                        <span id="remove" class="glyphicon glyphicon-remove" onclick="return confirm('remove stylist?')" /></span>
-                    </a>
+                        {% endfor %}
+                    </ul>
 
-                        <!-- </form> -->
+                {% else %}
+                    <h4> no stylists present </h4>
+                {% endif %}
 
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <h2> no stylists present </h2>
-        {% endif %}
+                <div class = "col-xs-6">
+                    <form action="/stylist_list" method="post">
+                        <div class="form-group has-primary">
+                            <label for = "stylist">add another stylist to team:</label>
+                            <input class="form-control" type="text" id="stylist_name" name="stylist_name" class="form-control" placeholder="ex: Scissors Armani" required>
+                        </div>
+                        <button type="submit" class="btn btn-success">add stylist</button></br>
+                    </form>
 
-        <div class = "col-xs-6">
-            <form action="/stylist_delete_all" method="post">
-                <div class="form-group has-primary">
+                    <form action="/stylist_delete_all" method="post">
+                        <div class="form-group has-primary">
+                        </div>
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('remove all stylists?')" />remove all stylists</button></br>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-danger" onclick="return confirm('remove stylist?')" />remove all stylists</button></br>
-            </form>
-
-   </body>
+    </body>
 </html>

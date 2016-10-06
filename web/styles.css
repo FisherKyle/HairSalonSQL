@@ -9,6 +9,7 @@ body {
   left: 50%;
   transform: translate(-50%, 0%);
   align-items:center;
+  text-align: center;
 
 }
 
@@ -49,6 +50,10 @@ li, h3, h4, label, h2 {
     color: white;
     font-family: "avenir";
 
+}
+
+li {
+    text-align: left;
 }
 
 label {

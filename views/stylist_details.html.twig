@@ -7,28 +7,49 @@
     </head>
 
     <body>
+        <div class="container jumbotron" id="big_box">
+            <div class = "row">
 
-        <h2>{{ current_stylist.getName }}</h2>
-        <h3>current clients:</h3>
-        {% if stylist_clients is not empty %}
+                <h2>Hair Management Systems:</h2>
 
-            {% for client in stylist_clients %}
-            <ul>
-                <li>{{ client.getName }}</li>
-            </ul>
-            {% endfor %}
+                <div class = "col-xs-4">
 
-        {% endif %}
+                    <h3>edit {{ current_stylist.getName }}'s details:</h3>
 
+                    <form action="/stylist_details/{{ current_stylist.getId }}" method="post">
+                        <div class="form-group">
+                            <input class="form-control" id="stylist_id" name="stylist_id" type="hidden" value="{{ current_stylist.getId }}">
+                            <input id="client-name" name="client-name" type="text" placeholder="new client for {{ current_stylist.getName }}" required="yes"><br>
+                            <button class="btn btn-success" type="submit">add client</button>
+                        </div>
+                    </form>
+                </div>
 
-        <form action="/stylist_details/{{ current_stylist.getId }}" method="post">
-          <div class="form-group">
-            <input class="form-control" id="stylist_id" name="stylist_id" type="hidden" value="{{ current_stylist.getId }}">
-            <input id="client-name" name="client-name" type="text" placeholder="new client for {{ current_stylist.getName }}"><br>
-          </div>
-            <button class="btn btn-success" type="submit">add client</button>
-        </form>
+                <div class = "col-xs-4">
 
-        <p><a href="/">home</a>
+                <h3>current clients:</h3>
+
+                {% if stylist_clients is not empty %}
+                    <ul>
+                    {% for client in stylist_clients %}
+                        <li><a href="/client_details/{{ client.getId }}">{{ client.getName }}</a>
+                            <a href="/stylist_details/{{ stylist.getId }}/delete">
+                                <span id="remove" class="glyphicon glyphicon-remove" onclick="return confirm('remove client?')" /></span>
+                            </a>
+                        </li>
+
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+                </div>
+
+                <div class = "col-xs-4">
+                    <h3>edit name:</h3>
+                        <button class="btn btn-success"><a href="/">home</a></button>
+                        <button class="btn btn-success"><a href="/stylist_list/">back</a></button>
+                </div>
+            </div>
+        </div>
+
    </body>
 </html>
