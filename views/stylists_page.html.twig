@@ -10,8 +10,8 @@
     <body>
         <div class="container jumbotron" id="big_box">
             <div class = "row">
+                <div class = "col-xs-6">
 
-                <h2>Hair Management Systems:</h2>
                 <h3>manage stylists:</h3>
                 {% if stylists is not empty %}
                     <ul>
@@ -29,6 +29,7 @@
                 {% else %}
                     <h4> no stylists present </h4>
                 {% endif %}
+            </div>
 
                 <div class = "col-xs-6">
                     <form action="/stylist_list" method="post">
