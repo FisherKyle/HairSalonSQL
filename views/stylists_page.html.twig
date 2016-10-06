@@ -10,41 +10,44 @@
     <body>
         <div class="container jumbotron" id="big_box">
             <div class = "row">
-                <div class = "col-xs-6">
+                <div id="inner_box">
+                    <h2 id="manage">manage stylists:</h2>
+                    <div class = "col-xs-6" id="manage_col">
+                        <form action="/stylist_list" method="post">
+                            <div class="form-group has-primary">
+                                <label for = "stylist">add another stylist to team:</label>
+                                <input class="form-control" type="text" id="stylist_name" name="stylist_name" class="form-control" placeholder="ex: Scissors Armani" required>
+                            </div>
+                            <button type="submit" class="btn btn-success">add stylist</button></br>
+                        </form>
 
-                <h3>manage stylists:</h3>
-                {% if stylists is not empty %}
-                    <ul>
-                        {% for stylist in stylists %}
+                        <form action="/stylist_delete_all" method="post">
+                            <div class="form-group has-primary">
+                            </div>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('remove all stylists?')" />remove all stylists</button></br>
+                        </form>
+                    </div>
+                    <div class = "col-xs-6">
 
-                        <li><a href="/stylist_details/{{ stylist.getId }}">{{ stylist.getName }}</a>
-                            <a href="/stylist_list/{{ stylist.getId }}/delete">
-                                <span id="remove" class="glyphicon glyphicon-remove" onclick="return confirm('remove stylist?')" /></span>
-                            </a>
-                        </li>
+                        {% if stylists is not empty %}
+                            <ul>
+                            {% for stylist in stylists %}
 
-                        {% endfor %}
-                    </ul>
+                                <li>
+                                    <a href="/stylist_details/{{ stylist.getId }}">{{ stylist.getName }}</a>
 
-                {% else %}
-                    <h4> no stylists present </h4>
-                {% endif %}
-            </div>
+                                    <a href="/stylist_list/{{ stylist.getId }}/delete">
+                                        <span id="remove" class="glyphicon glyphicon-remove" onclick="return confirm('remove stylist?')" /></span></a>
+                                </li>
 
-                <div class = "col-xs-6">
-                    <form action="/stylist_list" method="post">
-                        <div class="form-group has-primary">
-                            <label for = "stylist">add another stylist to team:</label>
-                            <input class="form-control" type="text" id="stylist_name" name="stylist_name" class="form-control" placeholder="ex: Scissors Armani" required>
-                        </div>
-                        <button type="submit" class="btn btn-success">add stylist</button></br>
-                    </form>
+                            {% endfor %}
+                            </ul>
 
-                    <form action="/stylist_delete_all" method="post">
-                        <div class="form-group has-primary">
-                        </div>
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('remove all stylists?')" />remove all stylists</button></br>
-                    </form>
+                        {% else %}
+                            <h4> no stylists present </h4>
+                        {% endif %}
+                    </div>
+
                 </div>
     </body>
 </html>

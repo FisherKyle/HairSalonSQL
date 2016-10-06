@@ -10,11 +10,9 @@
         <div class="container jumbotron" id="big_box">
             <div class = "row">
 
-                <h2>Hair Management Systems:</h2>
+                <div class = "col-xs-5" id="details_col">
 
-                <div class = "col-xs-4">
-
-                    <h3>edit {{ current_stylist.getName }}'s details:</h3>
+                    <h3><span id="manage_text">manage stylist: </span> {{ current_stylist.getName }}</h3>
 
                     <form action="/stylist_details/{{ current_stylist.getId }}" method="post">
                         <div class="form-group">
@@ -23,30 +21,39 @@
                             <button class="btn btn-success" type="submit">add client</button>
                         </div>
                     </form>
+
+                    <form action="/stylist_details/{{ current_stylist.getId }}" method="post">
+                        <div class="form-group">
+                            <input class="form-control" id="stylist_update" name="stylist_update" type="hidden" value="{{ current_stylist.getId }}">
+                            <input id="update-name" name="update-name" type="text" placeholder="enter name" required="yes"><br>
+                            <button class="btn btn-success" type="submit">update</button>
+                        </div>
+                    </form>
+
+                    <h3 id="manage_text">current clients:</h3>
+                        {% if stylist_clients is not empty %}
+                        <ul>
+                            {% for client in stylist_clients %}
+                            <li id="clientlist"><a href="/client_details/{{ client.getId }}">{{ client.getName }}</a>
+                                <a href="/stylist_details/{{ stylist.getId }}/delete">
+                                    <span id="remove" class="glyphicon glyphicon-remove" onclick="return confirm('remove client?')" /></span>
+                                </a>
+                            </li>
+
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+
+                        <form action="/client_delete_all" method="post">
+                            <div class="form-group has-primary">
+                            </div>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('remove all clients?')" />remove all clients</button></br>
+                        </form>
                 </div>
 
-                <div class = "col-xs-4">
-
-                <h3>current clients:</h3>
-
-                {% if stylist_clients is not empty %}
-                    <ul>
-                    {% for client in stylist_clients %}
-                        <li><a href="/client_details/{{ client.getId }}">{{ client.getName }}</a>
-                            <a href="/stylist_details/{{ stylist.getId }}/delete">
-                                <span id="remove" class="glyphicon glyphicon-remove" onclick="return confirm('remove client?')" /></span>
-                            </a>
-                        </li>
-
-                    {% endfor %}
-                    </ul>
-                {% endif %}
-                </div>
-
-                <div class = "col-xs-4">
-                    <h3>edit name:</h3>
-                        <button class="btn btn-success"><a href="/">home</a></button>
-                        <button class="btn btn-success"><a href="/stylist_list/">back</a></button>
+                <div class = "col_xs_3" id="nav">
+                    <button class="btn btn-success"><a href="/">home</a></button></br>
+                    <button class="btn btn-success"><a href="/stylist_list/">back</a></button>
                 </div>
             </div>
         </div>

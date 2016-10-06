@@ -97,6 +97,14 @@
         return $app['twig']->render('clients_page.html.twig', array('clients' => Client::getAll()));
     });
 
+// delete all clients
+
+    $app->post("/client_delete_all", function () use ($app){
+        Client::deleteAll();
+        return $app['twig']->render('stylist_details.html.twig', array('stylists' => Stylist::getAll()));
+
+    });
+
 //
 
     $app->get("/client_list/{id}", function($id) use ($app){
