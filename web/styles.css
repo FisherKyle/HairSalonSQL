@@ -63,3 +63,37 @@ label {
 #remove {
     color: #ee1122;
 }
+
+#home_left_col {
+    text-align: right;
+    margin-top: 6%;
+}
+
+#begin_label {
+    margin-bottom: 4%;
+}
+
+#home_header {
+    text-align: left;
+    margin-left: 3%;
+}
+
+#divider {
+    font-size: 900%;
+    position: static;
+    color: #e0e0e0;
+}
+
+#home {
+    margin-top: 100%;
+    color: #d0e0e0;
+}
+
+#inner_box {
+    margin-left: 8%;
+}
+
+#stylist_name {
+    text-align: right;
+    margin-right: 10%;
+}

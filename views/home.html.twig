@@ -8,13 +8,15 @@
 
     <body>
         <div class="container jumbotron" id="big_box">
+            <div id="inner_box">
             <div class = "row">
-                <h2>HAIR MANAGEMENT SYSTEMS HOME</h2>
 
-                <div class = "col-xs-6">
+
+                <div class = "col-xs-8" id="home_left_col">
+                    <h2><span id="home">home</span></h2>
                     <form action="/stylist_list" method="post">
                         <div class="form-group has-primary">
-                            <label for = "stylist">add stylist to team to begin:</label>
+                            <label for = "stylist" id="begin_label">begin by adding a stylist to the team:</label>
                             <input class="form-control" type="text" id="stylist_name" name="stylist_name" class="form-control" placeholder="enter stylist name here" required>
 
                         </div>
@@ -30,7 +32,12 @@
                     {% endif %}
 
                 </div>
+
+                <div class "col-xs-2" id="home_header">
+                    <h2><span id="divider">|</span></h2>
+                </div>
         </div>
+    </div>
     </body>
 </html>
 
