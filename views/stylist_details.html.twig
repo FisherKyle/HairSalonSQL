@@ -2,38 +2,32 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link href="styles.css" rel="stylesheet" type="text/css">
+        <link href="/styles.css" rel="stylesheet" type="text/css">
         <title>Hair Salon</title>
     </head>
 
     <body>
 
+        <h2>{{ current_stylist.getName }}</h2>
+        <h3>current clients:</h3>
+        {% if stylist_clients is not empty %}
 
-        <h3>{{ current_stylist.getName }}</h3>
+            {% for client in stylist_clients %}
+            <ul>
+                <li>{{ client.getName }}</li>
+            </ul>
+            {% endfor %}
 
-        <h3>{{ current_stylist.getId }}</h3>
-
-
-
-        <p><a href="/stylist_list/{{ current_stylist.getId }}/edit">edit stylist</a></p><br>
-
-        <h3>add client</h3><br>
+        {% endif %}
 
 
         <form action="/stylist_details/{{ current_stylist.getId }}" method="post">
           <div class="form-group">
             <input class="form-control" id="stylist_id" name="stylist_id" type="hidden" value="{{ current_stylist.getId }}">
-            <label for="client-name">Client Name</label>
-            <input id="client-name" name="client-name" type="text"><br>
+            <input id="client-name" name="client-name" type="text" placeholder="new client for {{ current_stylist.getName }}"><br>
           </div>
-            <button class="btn btn-success" type="submit">add</button>
+            <button class="btn btn-success" type="submit">add client</button>
         </form>
-
-        {% for client in stylist_clients %}
-        <ul>
-            <li>{{ client.getName }}</li>
-        </ul>
-        {% endfor %}
 
         <p><a href="/">home</a>
    </body>

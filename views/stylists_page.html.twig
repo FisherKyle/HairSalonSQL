@@ -6,16 +6,34 @@
         <title>Hair Salon</title>
     </head>
     <body>
-        <h1>Stylists:</h1>
+        <h2>manage stylists:</h2>
         {% if stylists is not empty %}
             <ul>
                 {% for stylist in stylists %}
-                    <li><a href="/stylist_details/{{ stylist.getId }}">{{ stylist.getName }}</a></li>
+
+                    <li><a href="/stylist_details/{{ stylist.getId }}">{{ stylist.getName }}</a>
+
+                        <!-- <form action="stylist_delete_one" method="post"> -->
+
+                    <a href="/stylist_list/{{ stylist.getId }}/delete">
+                        <span id="remove" class="glyphicon glyphicon-remove" onclick="return confirm('remove stylist?')" /></span>
+                    </a>
+
+                        <!-- </form> -->
+
+                    </li>
                 {% endfor %}
             </ul>
         {% else %}
             <h2> no stylists present </h2>
         {% endif %}
+
+        <div class = "col-xs-6">
+            <form action="/stylist_delete_all" method="post">
+                <div class="form-group has-primary">
+                </div>
+                <button type="submit" class="btn btn-danger" onclick="return confirm('remove stylist?')" />remove all stylists</button></br>
+            </form>
 
    </body>
 </html>

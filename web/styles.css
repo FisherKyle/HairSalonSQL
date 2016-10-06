@@ -44,3 +44,17 @@ input {
 #scan_word {
   max-width: 440px;
 }
+
+li, h3, h4, label, h2 {
+    color: white;
+    font-family: "avenir";
+
+}
+
+label {
+    font-size: 135%;
+}
+
+#remove {
+    color: #ee1122;
+}
