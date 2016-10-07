@@ -80,6 +80,15 @@
 
     });
 
+// update stylist's name
+
+    $app->patch("/stylist_details/{id}", function($id) use ($app){
+        $stylist_name=$_POST['stylist_update'];
+        $stylist=Stylist::find($id);
+        $stylist->update($stylist_name);
+        return $app['twig']->render('stylist_details.html.twig', array('stylists' => Stylist::getAll()));
+    });
+
 // delete one stylist_id
 
     $app->get("/stylist_list/{id}/delete", function ($id) use ($app){
@@ -99,9 +108,10 @@
 
 // delete all clients
 
-    $app->post("/client_delete_all", function () use ($app){
+    $app->post("/stylist_delete_clients/{id}", function ($id) use ($app){
+        $stylist = Stylist::find($id);
         Client::deleteAll();
-        return $app['twig']->render('stylist_details.html.twig', array('stylists' => Stylist::getAll()));
+        return $app['twig']->render('stylist_details.html.twig', array('current_stylist' => $stylist));
 
     });
 

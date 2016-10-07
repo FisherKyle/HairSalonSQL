@@ -44,16 +44,16 @@
                         </ul>
                         {% endif %}
 
-                        <form action="/client_delete_all" method="post">
+                        <form action="/stylist_delete_clients/{{ current_stylist.getId }}" method="post">
                             <div class="form-group has-primary">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('remove all clients?')" />remove all clients</button></br>
                             </div>
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('remove all clients?')" />remove all clients</button></br>
                         </form>
                 </div>
 
                 <div class = "col_xs_3" id="nav">
                     <button class="btn btn-success"><a href="/">home</a></button></br>
-                    <button class="btn btn-success"><a href="/stylist_list/">back</a></button>
+                    <button class="btn btn-success"><a href="/stylists_page.html.twig">back</a></button>
                 </div>
             </div>
         </div>

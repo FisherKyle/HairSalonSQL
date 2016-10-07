@@ -1,10 +1,10 @@
 body {
-  background-color: #112d3b;
+  background-color: #112d2b;
 }
 
 #big_box {
-  border-radius: 0px 0px 20px 20px;
-  background-color: #9fbcc6;
+  border-radius: 0px 0px 5px 5px;
+  background-color: #8fbcc6;
   position: fixed;
   left: 50%;
   transform: translate(-50%, 0%);
@@ -16,9 +16,10 @@ body {
 
 .btn {
   background-color: #396060;
-  border-color: #99bcc6;
+  border-color: #dddddd;
   margin-top: 2%;
   min-width: 140px;
+
 }
 
 h5 {
@@ -48,7 +49,7 @@ input {
   max-width: 440px;
 }
 
-li, h3, h4, label, h2 {
+li, h3, h4, label, h2, .btn {
     color: white;
     font-family: "avenir";
 
@@ -63,7 +64,7 @@ label {
 }
 
 #remove {
-    color: #ee1122;
+    color: #aa1122;
 }
 
 #home_left_col {
