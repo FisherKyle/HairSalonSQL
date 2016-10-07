@@ -24,8 +24,8 @@
 
                     <form action="/stylist_details/{{ current_stylist.getId }}" method="post">
                         <div class="form-group">
-                            <input class="form-control" id="stylist_update" name="stylist_update" type="hidden" value="{{ current_stylist.getId }}">
-                            <input id="update-name" name="update-name" type="text" placeholder="enter name" required="yes"><br>
+                            <input class="form-control" id="stylist_update" name="_method" type="hidden" value="patch">
+                            <input id="update-name" name="stylist_update" type="text" placeholder="enter stylist name" required="yes"><br>
                             <button class="btn btn-success" type="submit">update</button>
                         </div>
                     </form>
@@ -53,7 +53,7 @@
 
                 <div class = "col_xs_3" id="nav">
                     <button class="btn btn-success"><a href="/">home</a></button></br>
-                    <button class="btn btn-success"><a href="/stylists_page.html.twig">back</a></button>
+                    <button class="btn btn-success"><a href="/stylists_page">back</a></button>
                 </div>
             </div>
         </div>

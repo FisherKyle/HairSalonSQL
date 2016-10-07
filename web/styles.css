@@ -49,7 +49,7 @@ input {
   max-width: 440px;
 }
 
-li, h3, h4, label, h2, .btn {
+li, h3, h4, label, h2, .btn, a {
     color: white;
     font-family: "avenir";
 

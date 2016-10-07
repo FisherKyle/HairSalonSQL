@@ -51,7 +51,7 @@
             'current_stylist' => $stylist ));
     });
 
-// add client to stylist
+// add new client to stylist
 
     $app->post("/stylist_details/{id}", function($id) use ($app){
         $stylist = Stylist::find($id);
@@ -85,8 +85,8 @@
     $app->patch("/stylist_details/{id}", function($id) use ($app){
         $stylist_name=$_POST['stylist_update'];
         $stylist=Stylist::find($id);
-        $stylist->update($stylist_name);
-        return $app['twig']->render('stylist_details.html.twig', array('stylists' => Stylist::getAll()));
+        $stylist->updateName($stylist_name);
+        return $app['twig']->render('stylist_details.html.twig', array('current_stylist' => $stylist, 'stylist_clients' => Client::getAll()));
     });
 
 // delete one stylist_id
