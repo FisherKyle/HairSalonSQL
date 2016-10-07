@@ -113,7 +113,7 @@ label {
 }
 
 #add {
-    margin-botom: 10%;
+    margin-bottom: 10%;
 }
 
 #details_col {
@@ -129,8 +129,8 @@ label {
 }
 
 #nav {
-    float: bottom;
     margin-top: 40%;
     text-align: right;
     margin-right: 6%;
+    float:bottom;
 }

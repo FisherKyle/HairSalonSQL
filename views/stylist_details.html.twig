@@ -35,7 +35,7 @@
                         <ul>
                             {% for client in stylist_clients %}
                             <li id="clientlist"><a href="/client_details/{{ client.getId }}">{{ client.getName }}</a>
-                                <a href="/stylist_details/{{ stylist.getId }}/delete">
+                                <a href="/client_details/{{ stylist.getId }}/delete">
                                     <span id="remove" class="glyphicon glyphicon-remove" onclick="return confirm('remove client?')" /></span>
                                 </a>
                             </li>
@@ -50,7 +50,7 @@
                             </div>
                         </form>
                 </div>
-
+                
                 <div class = "col_xs_3" id="nav">
                     <button class="btn btn-success"><a href="/">home</a></button></br>
                     <button class="btn btn-success"><a href="/stylists_page">back</a></button>

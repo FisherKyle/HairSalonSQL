@@ -125,10 +125,10 @@
 
 // delete client
 
-    $app->delete("/client_list/{id}", function ($id) use ($app){
-        $client= Client::find($id);
-        $client->delete();
-        return $app['twig']->render('home.html.twig', array('clients' => Client::getAll()));
+    $app->get("/client_details/{id}/delete", function ($id) use ($app){
+        $client = Client::find($id);
+        $client->deleteOne();
+        return $app['twig']->render('stylist_details.html.twig', array('stylists' => Stylist::getAll(), 'clients' => Client::getAll()));
     });
 
     return $app;
