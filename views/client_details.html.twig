@@ -24,18 +24,16 @@
 
                     <h3>current stylist: {{ current_stylist.getName }}</h3>
 
-                        <form action="client_details/{{stylist_clients.getId}}/{{current_stylist.getId}}/select" method="post">
-                            <div class="form-group">
-                                <label for="selected_stylist_id">assign new stylist:</label>
-                                <select name="selected_stylist_id" class="selected_stylist_id" id="selected_stylist_id" required>
+                    <label for="selected_stylist_id">assign new stylist:</label>
+                        <form action="/{{stylist_clients.getId}}/{{current_stylist.getId}}", method="post">
+                                <select name="selected_stylist_name">
                                         {% for stylist in stylists %}
-                                            <option value = "{{stylist.getId}}"> {{stylist.getName}} </option>
+                                            <option name ="current_stylist_name" value = "{{stylist.getName}}"> {{stylist.getName}} </option>
                                         {% endfor %}
-                                        <input class="form-control" id="selected_stylist_id" name="_method" type="hidden" value="patch"></br>
+                                        <input class="btn btn-default" id="selected_stylist_id" name="_method" type="hidden" value="patch"></br>
 
                                         <button class="btn btn-default" type="submit" value="submit" name="selected_stylist_id">update</button>
                                 </select></br>
-                            </div>
                         </form>
 
 

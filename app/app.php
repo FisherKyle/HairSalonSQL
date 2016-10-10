@@ -118,9 +118,7 @@ $app->get("/stylist_details/{id}", function($id) use ($app){
 // render client info on client details page ------------------ //
 
     $app->get("/client_details/{id}/{stylist_id}/edit", function ($id, $stylist_id) use ($app){
-        $client_name = $_POST['client_update'];
         $client = Client::find($id);
-        $client->updateName($client_name);
         $stylist = Stylist::find($stylist_id);
         $stylists = Stylist::getAll();
         return $app['twig']->render('client_details.html.twig', array('stylist_clients' => $client, 'current_stylist' => $stylist, 'stylists' => $stylists, 'stylist_array' => $stylist->getAll()));
@@ -139,16 +137,23 @@ $app->get("/stylist_details/{id}", function($id) use ($app){
 
 // update client's stylist --------------- //
 
-    $app->post("/client_details/{id}/{stylist_id}/select", function($id, $stylist_id) use ($app) {
-        $stylists = Stylist::getAll();
-        $client = Client::find($id);
-        $stylist = Stylist::find($id);
-        $new_id = $_POST['selected_stylist_id'];
-        $client->switchStylist($new_id);
-        $client->save();
-        return $app['twig']->render('client_details.html.twig', array('stylist_clients' => $client->setStylistId($new_id), 'stylist' => $stylist, 'stylists' => $stylists, 'stylist_array' => $stylist->getAll()));
+    // $app->patch("/client_details/{id}/{stylist_id}", function($id, $stylist_id) use ($app) {
+    //     $stylists = Stylist::getAll();
+    //     $client = Client::find($id);
+    //     $stylist = Stylist::find($id);
+    //     $new_id = $_POST['selected_stylist_id'];
+    //     $client->switchStylist($new_id);
+    //     return $app['twig']->render('client_details.html.twig', array('stylist_clients' => $client->setStylistId($new_id), 'stylist' => $stylist, 'stylists' => $stylists, 'stylist_array' => $stylists);
+    // });
+
+$app->patch("/{id}/{stylist_id}", function($id, $stylist_id) use ($app) {
+    $new_name = ($_POST['selected_stylist_name']);
+    $stylist = Stylist::find($stylist_id);
+    $client = Client::find($id);
+    $client->switchProperty($new_name, $stylist->getId());
+    return $app['twig']->render('client_details.html.twig', array('stylist_clients' => $client, 'current_stylist' => $stylist, 'stylists' => Stylist::getAll()));
 });
 
-// http://localhost:8000/client_details/84/64/client_details/84/64/select?selected_stylist_id=60&_method=patch&selected_stylist_id=submit
-    return $app;
+return $app;
+
 ?>
