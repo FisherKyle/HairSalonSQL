@@ -149,8 +149,9 @@ $app->get("/stylist_details/{id}", function($id) use ($app){
 $app->patch("/{id}/{stylist_id}", function($id, $stylist_id) use ($app) {
     $new_name = ($_POST['selected_stylist_name']);
     $stylist = Stylist::find($stylist_id);
+    $stylist->switchProperty($stylist->getId(), $new_name);
     $client = Client::find($id);
-    $client->switchProperty($new_name, $stylist->getId());
+    $client->switchProperty($client->getStylistId());
     return $app['twig']->render('client_details.html.twig', array('stylist_clients' => $client, 'current_stylist' => $stylist, 'stylists' => Stylist::getAll()));
 });
 

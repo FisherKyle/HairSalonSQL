@@ -91,6 +91,17 @@
       }
       return $clients;
     }
+    function switchProperty($switched_stylist_id=null, $switched_stylist_name=null)
+    {
+        if ($switched_stylist_id != null) {
+            $GLOBALS['DB']->exec("UPDATE stylists SET stylist_id = '{$switched_stylist_id}' WHERE id = {$this->getId()};");
+            $this->getId($switched_stylist_id);
+        }
+        if ($switched_stylist_name != null) {
+            $GLOBALS['DB']->exec("UPDATE stylists SET name = '{$switched_stylist_name}' WHERE id = {$this->getId()};");
+            $this->setName($switched_stylist_name);
+        }
+    }
 
   }
 ?>
