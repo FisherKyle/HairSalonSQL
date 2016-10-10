@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="/styles.css" rel="stylesheet" type="text/css">
+        <title>Hair Salon</title>
+    </head>
+
+    <body>
+        <div class="container jumbotron" id="big_box">
+            <div class = "row">
+                <div class = "col-xs-7" id="details_col">
+
+                    <h3><span id="manage_text">manage client: </span> {{ stylist_clients.getName }}</h3>
+
+{# form for updating clients's name ________________ #}
+                    <form action="/client_details/{{ stylist_clients.getId }}/{{current_stylist.getId}}/name" method="post">
+                        <div class="form-group">
+                            <input class="form-control" id="client_update" name="_method" type="hidden" value="patch">
+                            <input id="update-name" name="client_update" type="text" placeholder="edit client's name" required="yes"><br>
+                            <button class="btn btn-success" type="submit">update</button>
+                        </div>
+                    </form>
+
+                    <h3>current stylist: {{ current_stylist.getName }}</h3>
+
+                    <div>
+                        <form action="client_details/{{stylist_clients.getId}}/{{current_stylist.getId}}/select" method="post">
+                            <label for="stylist_select">assign new stylist:</label>
+                            <select class="stylist_select">
+                                <optgroup label="{{current_stylist.getName}}">
+                                    {% for stylist in stylists %}
+                                <li><option name="select_new_stylist" value="{{stylist.getId }}">{{stylist.getName}}</option>
+                                </li>
+                                    {% endfor %}
+                            </select></br>
+                            <button type="submit" class="btn btn-default">confirm new stylist</button>
+                    </div>
+
+
+
+{# nav buttons ________________ #}
+                <div class = "col_xs_3" id="nav">
+                    <button class="btn btn-success"><a href="/">home</a></button></br>
+                    <button class="btn btn-success"><a href="/stylists_page">back</a></button>
+                </div>
+            </div>
+        </div>
+
+   </body>
+</html>

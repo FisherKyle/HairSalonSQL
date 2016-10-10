@@ -38,7 +38,7 @@
                             <ul>
                             {% for client in stylist_clients %}
                                 <li id="clientlist">
-                                    <a href="/client_details/{{ client.getId }}">{{ client.getName }}</a>
+                                    <a href="/client_details/{{ client.getId }}/{{ client.getStylistId }}/edit">{{ client.getName }}</a>
 
                                     <a href="/client_details/{{ client.getId }}/{{ client.getStylistId }}/delete">
                                         <span id="remove" class="glyphicon glyphicon-remove" onclick="return confirm('remove client?')" /></span></a>

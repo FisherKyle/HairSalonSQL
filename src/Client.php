@@ -78,17 +78,6 @@
           $this->setName($new_client_name);
         }
 
-        function switchProperty($switched_client_name=null, $switched_stylist_id=null)
-        {
-            if ($switched_client_name != null) {
-                $GLOBALS['DB']->exec("UPDATE clients SET name = '{$switched_client_name}' WHERE id = {$this->getId()};");
-                $this->setName($switched_client_name);
-            }
-            if ($switched_stylist_id != null) {
-                $GLOBALS['DB']->exec("UPDATE clients SET stylist_id = '{$switched_stylist_id}' WHERE id = {$this->getId()};");
-                $this->setStylistId ($switched_stylist_id);
-            }
-        }
 
         static function find($search_id)
         {
@@ -104,5 +93,26 @@
             }
             return $matching_client;
         }
+
+        function switchStylist($new_id=null)
+        {
+            if ($new_id != null) {
+                    $GLOBALS['DB']->exec("UPDATE clients SET stylist_id = '{$new_id}' WHERE id = {$this->getId()};");
+                    $this->setStylistId($new_id);
+                }
+            }
+
     }
 ?>
+
+<!-- // function switchProperty($switched_client_name=null, $switched_stylist_id=null)
+// {
+    //     if ($switched_client_name != null) {
+        //         $GLOBALS['DB']->exec("UPDATE clients SET name = '{$switched_client_name}' WHERE id = {$this->getId()};");
+        //         $this->setName($switched_client_name);
+        //     }
+        //     if ($switched_stylist_id != null) {
+            //         $GLOBALS['DB']->exec("UPDATE clients SET stylist_id = '{$switched_stylist_id}' WHERE id = {$this->getId()};");
+            //         $this->setStylistId ($switched_stylist_id);
+            //     }
+            // } -->
