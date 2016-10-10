@@ -151,3 +151,11 @@ label {
     margin-left: 5%;
     margin-top: 1px;
 }
+
+#nav_client_details {
+    margin-top: 20%;
+    text-align: right;
+    margin-right: 6%;
+    float:bottom;
+    float:right;
+}
