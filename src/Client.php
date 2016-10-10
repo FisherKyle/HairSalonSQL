@@ -6,11 +6,11 @@
         private $id;
 
         function __construct($name, $stylist_id, $id = null)
-            {
-                $this->name = $name;
-                $this->stylist_id = $stylist_id;
-                $this->id = $id;
-            }
+        {
+            $this->name = $name;
+            $this->stylist_id = $stylist_id;
+            $this->id = $id;
+        }
 
 // ---- GET * SET ---- //
 
@@ -96,25 +96,12 @@
 
         function switchProperty($switched_stylist_id=null)
         {
-            if ($switched_stylist_id != null) {
+            if ($switched_stylist_id != null)
+            {
                 $GLOBALS['DB']->exec("UPDATE stylists SET stylist_id = '{$switched_stylist_id}' WHERE id = {$this->getId()};");
                 $this->setStylistId($switched_stylist_id);
             }
-            // if ($switched_stylist_name != null) {
-            //     $GLOBALS['DB']->exec("UPDATE stylists SET name = '{$switched_stylist_name}' WHERE id = {$this->getId()};");
-            //     $this->setName($switched_stylist_name);
-            // }
         }
     }
 
-    //
-    //     function switchStylist($new_id=null)
-    //     {
-    //         if ($new_id != null) {
-    //                 $GLOBALS['DB']->exec("UPDATE clients SET stylist_id = '{$new_id}' WHERE id = {$this->getId()};");
-    //                 $this->setStylistId($new_id);
-    //             }
-    //         }
-    //
-    // }
 ?>
