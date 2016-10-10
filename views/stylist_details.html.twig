@@ -14,6 +14,16 @@
 
                     <h3><span id="manage_text">manage stylist: </span> {{ current_stylist.getName }}</h3>
 
+{# form for updating stylist's name ________________ #}
+                    <form action="/stylist_details/{{ current_stylist.getId }}" method="post">
+                        <div class="form-group">
+                            <input class="form-control" id="stylist_update" name="_method" type="hidden" value="patch">
+                            <input id="update-name" name="stylist_update" type="text" placeholder="edit stylist's name" required="yes"><br>
+                            <button class="btn btn-success" type="submit">update</button>
+                        </div>
+                    </form>
+
+{# form for adding a client ________________ #}
                     <form action="/stylist_details/{{ current_stylist.getId }}" method="post">
                         <div class="form-group">
                             <input class="form-control" id="stylist_id" name="stylist_id" type="hidden" value="{{ current_stylist.getId }}">
@@ -22,28 +32,22 @@
                         </div>
                     </form>
 
-                    <form action="/stylist_details/{{ current_stylist.getId }}" method="post">
-                        <div class="form-group">
-                            <input class="form-control" id="stylist_update" name="_method" type="hidden" value="patch">
-                            <input id="update-name" name="stylist_update" type="text" placeholder="enter stylist name" required="yes"><br>
-                            <button class="btn btn-success" type="submit">update</button>
-                        </div>
-                    </form>
-
+{# display of clients along with delete function icon ________________ #}
                     <h3 id="manage_text">current clients:</h3>
                         {% if stylist_clients is not empty %}
-                        <ul>
+                            <ul>
                             {% for client in stylist_clients %}
-                            <li id="clientlist"><a href="/client_details/{{ client.getId }}">{{ client.getName }}</a>
-                                <a href="/client_details/{{ client.getId }}/{{ client.getStylistId }}/delete">
-                                    <span id="remove" class="glyphicon glyphicon-remove" onclick="return confirm('remove client?')" /></span>
-                                </a>
-                            </li>
+                                <li id="clientlist">
+                                    <a href="/client_details/{{ client.getId }}">{{ client.getName }}</a>
 
+                                    <a href="/client_details/{{ client.getId }}/{{ client.getStylistId }}/delete">
+                                        <span id="remove" class="glyphicon glyphicon-remove" onclick="return confirm('remove client?')" /></span></a>
+                                </li>
                             {% endfor %}
-                        </ul>
+                            </ul>
                         {% endif %}
 
+{# button for deleting all clients from stylist ________________ #}
                         <form action="/stylist_delete_clients/{{ current_stylist.getId }}" method="post">
                             <div class="form-group has-primary">
                                 <button type="submit" class="btn btn-danger" onclick="return confirm('remove all clients?')" />remove all clients</button></br>
@@ -51,6 +55,7 @@
                         </form>
                 </div>
 
+{# nav buttons ________________ #}
                 <div class = "col_xs_3" id="nav">
                     <button class="btn btn-success"><a href="/">home</a></button></br>
                     <button class="btn btn-success"><a href="/stylists_page">back</a></button>
