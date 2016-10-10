@@ -33,19 +33,22 @@
                     </form>
 
 {# display of clients along with delete function icon ________________ #}
+                <div>
                     <h3 id="manage_text">current clients:</h3>
                         {% if stylist_clients is not empty %}
                             <ul>
                             {% for client in stylist_clients %}
-                                <li id="clientlist">
+                                <h5><li id="clientlist">
                                     <a href="/client_details/{{ client.getId }}/{{ client.getStylistId }}/edit">{{ client.getName }}</a>
 
                                     <a href="/client_details/{{ client.getId }}/{{ client.getStylistId }}/delete">
                                         <span id="remove" class="glyphicon glyphicon-remove" onclick="return confirm('remove client?')" /></span></a>
-                                </li>
+                                </li></h5>
                             {% endfor %}
                             </ul>
-                        {% endif %}
+                            {% else %}
+                                <h4> no clients present </h4>
+                            {% endif %}
 
 {# button for deleting all clients from stylist ________________ #}
                         <form action="/stylist_delete_clients/{{ current_stylist.getId }}" method="post">
@@ -54,13 +57,24 @@
                             </div>
                         </form>
                 </div>
+            </div>
+
+                <div class = "row" id="bottom_row">
+
+                <div class = "col-xs-5" id="bulletin">
+                    <div class = "container">
+                        <div class = "jumbotron" id="bulletron">
+
+                        </div>
+                    </div>
+                </div>
 
 {# nav buttons ________________ #}
-                <div class = "col_xs_3" id="nav">
-                    <button class="btn btn-success"><a href="/">home</a></button></br>
-                    <button class="btn btn-success"><a href="/stylists_page">back</a></button>
+                    <div class = "col_xs_3" id="nav">
+                        <button class="btn btn-success"><a href="/">home</a></button></br>
+                        <button class="btn btn-success"><a href="/stylists_page">back</a></button>
+                    </div>
                 </div>
-            </div>
         </div>
 
    </body>

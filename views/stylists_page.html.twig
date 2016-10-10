@@ -11,7 +11,7 @@
         <div class="container jumbotron" id="big_box">
             <div class = "row">
                 <div id="inner_box">
-                    <h2 id="manage">manage stylists:</h2>
+                    <h2 id="manage">stylist management page:</h2>
                     <div class = "col-xs-6" id="manage_col">
 
 {# form for adding a stylist ________________ #}
@@ -37,12 +37,12 @@
                         {% if stylists is not empty %}
                             <ul>
                             {% for stylist in stylists %}
-                                <li>
+                                <h5><li>
                                     <a href="/stylist_details/{{ stylist.getId }}">{{ stylist.getName }}</a>
 
                                     <a href="/stylist_list/{{ stylist.getId }}/delete">
-                                        <span id="remove" class="glyphicon glyphicon-remove" onclick="return confirm('remove stylist?')" /></span></a>
-                                </li>
+                                        <span id="remove" class="glyphicon glyphicon-remove" onclick="return confirm('remove stylist: {{stylist.getName}} ?')" /></span></a>
+                                </li></h5>
                             {% endfor %}
                             </ul>
 {# display empty notice#}   {% else %}

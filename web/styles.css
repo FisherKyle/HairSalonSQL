@@ -11,8 +11,18 @@ body {
   align-items:center;
   text-align: center;
   max-width: 900px;
-
 }
+
+#small_box {
+    background-color: #95acb9;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    outline-color: black;
+    float: right;
+    position: relative;
+}
+
+
 
 .btn {
   background-color: #396060;
@@ -129,10 +139,12 @@ label {
 }
 
 #nav {
-    margin-top: 40%;
     text-align: right;
-    margin-right: 6%;
-    float:bottom;
+    margin-right: 8%;
+    float: top;
+    float: right;
+    position: relative;
+    margin-top: 3%;
 }
 
 #spacer {
@@ -152,10 +164,28 @@ label {
     margin-top: 1px;
 }
 
-#nav_client_details {
-    margin-top: 20%;
+#nav_client_detail {
+    margin-top: 4%;
     text-align: right;
     margin-right: 6%;
-    float:bottom;
-    float:right;
+    float: bottom;
+    float: right;
+}
+
+#bottom_row {
+    text-align: right;
+}
+
+#bulletron {
+    background-color: #dfeff0;
+    float: right;
+    position: relative;
+    min-width: 380px;
+    border-radius: 2px;
+    border: 1px solid #8b8fa2;
+    min-height: 470px;
+}
+
+#bulletin {
+    float: right;
 }

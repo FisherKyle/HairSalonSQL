@@ -11,39 +11,44 @@
             <div class = "row">
                 <div class = "col-xs-7" id="details_col">
 
-                    <h3><span id="manage_text">manage client: </span> {{ stylist_clients.getName }}</h3>
+                        <h2><span id="manage_text">client: </span> {{ stylist_clients.getName }}</h2>
 
 {# form for updating clients's name ________________ #}
-                    <form action="/client_details/{{ stylist_clients.getId }}/{{current_stylist.getId}}/name" method="post">
-                        <div class="form-group">
-                            <input class="form-control" id="client_update" name="_method" type="hidden" value="patch">
-                            <input id="update-name" name="client_update" type="text" placeholder="edit client's name" required="yes"><br>
-                            <button class="btn btn-success" type="submit">update</button>
-                        </div>
-                    </form>
-
-                    <h3>current stylist: {{ current_stylist.getName }}</h3>
-
-                    <label for="selected_stylist_id">assign new stylist:</label>
-                        <form action="/{{stylist_clients.getId}}/{{current_stylist.getId}}", method="post">
-                                <select name="selected_stylist_name">
-                                        {% for stylist in stylists %}
-                                            <option name ="current_stylist_name" value = "{{stylist.getName}}"> {{stylist.getName}} </option>
-                                        {% endfor %}
-                                        <input class="btn btn-default" id="selected_stylist_id" name="_method" type="hidden" value="patch"></br>
-
-                                        <button class="btn btn-default" type="submit" value="submit" name="selected_stylist_id">update</button>
-                                </select></br>
+                        <form action="/client_details/{{ stylist_clients.getId }}/{{current_stylist.getId}}/name" method="post">
+                            <div class="form-group">
+                                <input class="form-control" id="client_update" name="_method" type="hidden" value="patch">
+                                <input id="update-name" name="client_update" type="text" placeholder="edit client's name" required="yes"><br>
+                                <button class="btn btn-success" type="submit">update</button>
+                            </div>
                         </form>
 
+                        <h3>current stylist: {{ current_stylist.getName }}</h3>
+                </div>
 
+                <div class = "container jumbotron" id="small_box">
+                    <div class = "col-xs-4">
+
+                        <label for="selected_stylist_id">assign {{ stylist_clients.getName }} a new stylist:</label>
+                            <form action="/{{stylist_clients.getId}}/{{current_stylist.getId}}", method="post">
+                                    <select name="selected_stylist_name">
+                                            {% for stylist in stylists %}
+                                                <option name ="current_stylist_name" value = "{{stylist.getName}}"> {{stylist.getName}} </option>
+                                            {% endfor %}
+                                            <input class="btn btn-default" id="selected_stylist_id" name="_method" type="hidden" value="patch"></br>
+
+                                            <button class="btn btn-default" type="submit" value="submit" name="selected_stylist_id">update</button>
+                                    </select></br>
+                            </form>
+                    </div>
+                </div>
 
 {# nav buttons ________________ #}
-                <div class = "col_xs_3" id="nav_client_detail">
-                    <button class="btn btn-success"><a href="/">home</a></button></br>
-                    <button class="btn btn-success"><a href="/stylist_details/{{current_stylist.getId}}">back</a></button>
+                <div class = row>
+                    <div class = "col_xs_3" id="nav_client_detail">
+                        <button class="btn btn-success"><a href="/">home</a></button></br>
+                        <button class="btn btn-success"><a href="/stylist_details/{{current_stylist.getId}}">back</a></button>
+                    </div>
                 </div>
-            </div>
         </div>
 
    </body>
