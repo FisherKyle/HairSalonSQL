@@ -17,7 +17,7 @@
 {# form for adding a stylist ________________ #}
                         <form action="/stylist_list" method="post">
                             <div class="form-group has-primary">
-                                <label for = "stylist">add another stylist to team:</label>
+                                <label for = "stylist" id="spacer">add another stylist to team:</label>
                                 <input class="form-control" type="text" id="stylist_name" name="stylist_name" class="form-control" placeholder="enter stylist name here" required>
                             </div>
                             <button type="submit" class="btn btn-success">add stylist</button></br>
@@ -31,8 +31,9 @@
                         </form>
                     </div>
 
-{# display of all stylists along with delete function icon ________________ #}
-                    <div class = "col-xs-6">
+{# display of all stylists (links) along with delete function icon ________________ #}
+                    <div class = "col-xs-5" id="col_align">
+                        <label for "stylists" id="spacer2">current stylists:</label>
                         {% if stylists is not empty %}
                             <ul>
                             {% for stylist in stylists %}
